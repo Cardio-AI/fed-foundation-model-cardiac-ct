@@ -16,6 +16,8 @@ Federated learning (FL) is a renowned technique for utilizing decentralized data
     Additionally, we show that our transformer-based model extracts more meaningful features for further downstream tasks than the UNet-based one by only training the last layer to also solve segmentation of coronary arteries.
     We make the code and weights of the final model openly available, which can serve as a foundation model for further research in cardiac CT imaging.
 
+![Graphical Abstract](images/method.jpg)
+
 ## BibTeX
 
 ```
@@ -60,6 +62,26 @@ The checkpoints will be made available upon acceptance.
 ```
 python tavi_predictor.py --fname ct.nii.gz --tmp_dir ./tmp
 ```
+
+This will create predictions of Hinge Points, Coronary Ostias, Membranous Septum, and Calcification.
+
+## Results
+
+In our federation of 10 university hospitals across Germany each holds different labels that are important in cardiac CT analysis prior to TAVI.
+Despite the only partially existing labels across the participating locations we were able to learn one model that can predict all.
+Still, the transformer-based model (SWIN-UNETR) performs worse than a UNet with the small amounts of labelled data per label.
+By using the unlabelled data in a semi-supervised fashion with knowledge distillation we are able to increase the performance of the SWIN-UNETR.
+
+![Qualitative Results](images/tavi_predictor_slices.png)
+
+![Hinge Points](images/eval_hinge_points.png)
+![Membranous Septum](images/eval_membranous_septum.png)
+![Calcification](images/eval_calc.png)
+
+We show that the performance of the model for predicting points is limited by the inter-observer variability between labeling locations.
+Again, the SWIN-UNETR only performs on par with the federated trained UNet if the unlabeled samples are used in a semi-supervised fashion.
+
+![Inter-observer variability on public dataset](images/performance_methods_public_dataset.png)
 
 ## Contact
 

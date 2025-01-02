@@ -1,31 +1,30 @@
-# Federated Foundation Model for Cardiac CT Imaging
+# Real World Federated Learning with a Knowledge Distilled Transformer for Cardiac CT Imaging
 
 Malte Tölle, Philipp Garthe, Clemens Scherer, Jan Moritz Seliger, Andreas Leha, Nina Krüger, Stefan Simm, Simon Martin, Sebastian Eble, Halvar Kelm, Moritz Bednorz, Florian André, Peter Bannas, Gerhard Diller, Norbert Frey, Stefan Groß, Anja Hennemuth, Lars Kaderali, Alexander Meyer, Eike Nagel, Stefan Orwat, Moritz Seiffert, Tim Friede, Tim Seidler, Sandy Engelhardt
 
-Paper link: 
+[Paper link](https://arxiv.org/abs/2407.07557)
 
 ## Abstract
 
-Federated learning (FL) is a renowned technique for utilizing decentralized data while preserving privacy. 
-    However, real-world applications often involve inherent challenges such as partially labeled datasets, where not all clients possess expert annotations of all labels of interest, leaving large portions of unlabeled data unused. %inter-observer variability, and data quality across different clients. 
-    In this study, we conduct the largest federated cardiac CT imaging analysis to date, focusing on partially labeled datasets ($n=8,124$) of Transcatheter Aortic Valve Implantation (TAVI) patients over eight hospital clients. %RETROSPECTIVE CLINICAL ROUTINE DATA
-    Transformer architectures, which are the major building blocks of current  foundation models, have shown superior performance when trained on larger cohorts than traditional CNNs. 
-    However, when trained on small task-specific labeled sample sizes, it is currently not feasible to exploit their underlying attention mechanism for improved performance. 
-    Therefore, we developed a two-stage semi-supervised learning strategy that distills knowledge from several task-specific CNNs (landmark detection and segmentation of calcification) into a single transformer model by utilizing large amounts of unlabeled data typically residing unused in hospitals to mitigate these issues.
-    This method not only improves the predictive accuracy and generalizability of transformer-based architectures but also facilitates the simultaneous learning of all partial labels within a single transformer model across the federation.
-    Additionally, we show that our transformer-based model extracts more meaningful features for further downstream tasks than the UNet-based one by only training the last layer to also solve segmentation of coronary arteries.
-    We make the code and weights of the final model openly available, which can serve as a foundation model for further research in cardiac CT imaging.
+Federated learning is a renowned technique for utilizing decentralized data while preserving privacy. 
+However, real-world applications often face challenges like partially labeled datasets, where only a few locations have certain expert annotations, leaving large portions of unlabeled data unused. 
+Leveraging these could enhance transformer architectures’ ability in regimes with small and diversely annotated sets.
+We conduct the largest federated cardiac CT analysis to date ($n=8,104$) in a real-world setting across eight hospitals. Our two-step semi-supervised strategy distills knowledge from task-specific CNNs into a transformer. 
+First, CNNs predict on unlabeled data per label type and then the transformer learns from these predictions with label-specific heads. 
+This improves predictive accuracy and enables simultaneous learning of all partial labels across the federation, and outperforms UNet-based models in  generalizability on downstream tasks. 
+Code and model weights are made openly available for leveraging future cardiac CT analysis.
 
 ![Graphical Abstract](images/method.jpg)
 
 ## BibTeX
 
 ```
-@misc{toelle2024cardic-ct,
-    title={Federated Foundation Model for Cardiac CT Imaging},
+@article{toelle2024fedkd,
+    title={Real World Federated Learning with a Knowledge Distilled Transformer for Cardiac CT Imaging},
     author={Tölle, Malte and Garthe, Philipp and Scherer, Clemens and Seliger, Jan Moritz and Leha, Andreas and Krüger, Nina and Simm, Stefan and Martin, Simon and Eble, Sebastian and Kelm, Halvar and Bednorz, Moritz and André, Florian and Bannas, Peter and Diller, Gerhard and Frey, Norbert and Groß, Stefan and Hennemuth, Anja and Kaderali, Lars and Meyer, Alexander and Nagel, Eike and Orwat, Stefan and Seiffert, Moritz and Friede, Tim and Seidler, Tim and Engelhardt, Sandy},
     year={2024},
-    doi={arXiv}
+    journal={npj Digital Medicine}
+    doi={10.48550/arXiv.2407.07557}
 }
 ```
 
